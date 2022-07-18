@@ -1,0 +1,262 @@
+{
+  "description": "All trials and metadata from the assessment Grid Memory.",
+  "$comment": "Activity identifier: grid-memory, version: 0.8.0. JSON Schema generated 2022-07-18T20:26:32.580Z.",
+  "type": "object",
+  "required": [
+    "trials"
+  ],
+  "properties": {
+    "trials": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/trial"
+      },
+      "description": "All trials from the assessment."
+    }
+  },
+  "$defs": {
+    "trial": {
+      "type": "object",
+      "properties": {
+        "activity_uuid": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Unique identifier for all trials in this administration of the activity."
+        },
+        "activity_id": {
+          "type": "string",
+          "description": "Identifier of the activity."
+        },
+        "activity_version": {
+          "type": "string",
+          "description": "Version of the activity."
+        },
+        "activity_begin_iso8601_timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp at the beginning of the game activity."
+        },
+        "trial_begin_iso8601_timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time",
+          "description": "ISO 8601 timestamp at the beginning of the trial. Null if trial was skipped."
+        },
+        "trial_index": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Index of the trial within this assessment, 0-based."
+        },
+        "presented_cells": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "description": "Randomly chosen locations of the dots presented to the user. Null if trial was skipped.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "row": {
+                "type": "integer",
+                "description": "Row of the cell, 0-indexed."
+              },
+              "column": {
+                "type": "integer",
+                "description": "Column of the cell, 0-indexed."
+              }
+            }
+          }
+        },
+        "selected_cells": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "description": "User selected locations of the dots. Null if trial was skipped.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "row": {
+                "type": "integer",
+                "description": "Row of the cell, 0-indexed."
+              },
+              "column": {
+                "type": "integer",
+                "description": "Column of the cell, 0-indexed."
+              }
+            }
+          }
+        },
+        "user_dot_actions": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "description": "Complete user dot actions: placement, removal, and done. Null if trial was skipped.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "elapsed_duration_ms": {
+                "type": "number",
+                "description": "Duration, milliseconds, from when dot recall scene fully appeared until this user action."
+              },
+              "action_type": {
+                "type": "string",
+                "enum": [
+                  "placed",
+                  "removed",
+                  "done"
+                ],
+                "description": "Was the action a dot placement, dot removal, or done button push?"
+              },
+              "cell": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "description": "Cell of user action; null if non-applicable (user action was done button push).",
+                "properties": {
+                  "row": {
+                    "type": "integer",
+                    "description": "Row of the cell, 0-indexed."
+                  },
+                  "column": {
+                    "type": "integer",
+                    "description": "Column of the cell, 0-indexed."
+                  },
+                  "tap_x": {
+                    "type": "number",
+                    "description": "X coordinate of user's tap on the cell, relative to the cell."
+                  },
+                  "tap_y": {
+                    "type": "number",
+                    "description": "Y coordinate of user's tap on the cell, relative to the cell."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "user_interference_actions": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "description": "User actions tapping the interference targets. Null if trial was skipped.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "elapsed_duration_ms": {
+                "type": "number",
+                "description": "Duration, milliseconds, from when interference scene fully appeared until this user action."
+              },
+              "action_type": {
+                "type": "string",
+                "enum": [
+                  "on-target",
+                  "off-target"
+                ],
+                "description": "Was the action on an interference target or off?"
+              },
+              "cell": {
+                "type": "object",
+                "description": "Cell of user interference action.",
+                "properties": {
+                  "row": {
+                    "type": "integer",
+                    "description": "Row of the cell, 0-indexed."
+                  },
+                  "column": {
+                    "type": "integer",
+                    "description": "Column of the cell, 0-indexed."
+                  },
+                  "tap_x": {
+                    "type": "number",
+                    "description": "X coordinate of user's tap on the cell, relative to the cell."
+                  },
+                  "tap_y": {
+                    "type": "number",
+                    "description": "Y coordinate of user's tap on the cell, relative to the cell."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "number_of_correct_dots": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Number of dots that were correctly placed. Null if trial was skipped."
+        },
+        "quit_button_pressed": {
+          "type": "boolean",
+          "description": "Was the quit button pressed?"
+        },
+        "device_metadata": {
+          "type": "object",
+          "description": "Information about the user's device.",
+          "properties": {
+            "userAgent": {
+              "type": "string",
+              "description": "The user agent string returned by navigator.userAgent."
+            },
+            "devicePixelRatio": {
+              "type": "number",
+              "description": "Ratio of physical pixels to CSS pixels."
+            },
+            "screen": {
+              "type": "object",
+              "description": "Screen information returned by window.screen.",
+              "properties": {
+                "availHeight": {
+                  "type": "number",
+                  "description": "Height of screen, in pixels, excluding UI features."
+                },
+                "availWidth": {
+                  "type": "number",
+                  "description": "Width of screen, in pixels, excluding UI features."
+                },
+                "colorDepth": {
+                  "type": "number",
+                  "description": "Color depth of screen."
+                },
+                "height": {
+                  "type": "number",
+                  "description": "Height of screen, in pixels"
+                },
+                "width": {
+                  "type": "number",
+                  "description": "Width of screen, in pixels."
+                },
+                "orientation": {
+                  "type": "object",
+                  "description": "Information about the device's orientation.",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "The orientation type (ScreenOrientation.type)."
+                    },
+                    "angle": {
+                      "type": "number",
+                      "description": "The orientation angle (ScreenOrientation.angle)."
+                    }
+                  }
+                },
+                "pixelDepth": {
+                  "type": "number",
+                  "description": "Pixel depth of screen."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

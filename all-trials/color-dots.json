@@ -1,0 +1,242 @@
+{
+  "description": "All trials and metadata from the assessment Color Dots.",
+  "$comment": "Activity identifier: color-dots, version: 0.8.0. JSON Schema generated 2022-07-18T20:26:32.580Z.",
+  "type": "object",
+  "required": [
+    "trials"
+  ],
+  "properties": {
+    "trials": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/trial"
+      },
+      "description": "All trials from the assessment."
+    }
+  },
+  "$defs": {
+    "trial": {
+      "type": "object",
+      "properties": {
+        "activity_uuid": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Unique identifier for all trials in this administration of the activity."
+        },
+        "activity_id": {
+          "type": "string",
+          "description": "Identifier of the activity."
+        },
+        "activity_version": {
+          "type": "string",
+          "description": "Version of the activity."
+        },
+        "activity_begin_iso8601_timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp at the beginning of the game activity."
+        },
+        "trial_begin_iso8601_timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time",
+          "description": "ISO 8601 timestamp at the beginning of the trial. Null if trial was skipped."
+        },
+        "trial_index": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Index of the trial within this assessment, 0-based."
+        },
+        "square_side_length": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Length of square side, in pixels. This is the square in which the dots are shown. Null if trial was skipped."
+        },
+        "presented_dots": {
+          "description": "Configuration of dots presented to the user. Null if trial was skipped.",
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "object",
+            "properties": {
+              "color_name": {
+                "type": "string",
+                "description": "Human-friendly name of color."
+              },
+              "rgba_color": {
+                "type": "array",
+                "description": "Color as array, [r,g,b,a].",
+                "items": {
+                  "type": "number"
+                }
+              },
+              "location": {
+                "type": "object",
+                "description": "Location of dot.",
+                "properties": {
+                  "x": {
+                    "type": "number",
+                    "description": "X coordinate of dot."
+                  },
+                  "y": {
+                    "type": "number",
+                    "description": "Y coordinate of dot."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "color_target_dot_index": {
+          "description": "Index (0-based) of presented dot whose color the user was asked to recall. Null if trial was skipped.",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "color_selected": {
+          "description": "Color selected by user. Null if trial was skipped.",
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "color_name": {
+              "type": "string",
+              "description": "Human-friendly name of color."
+            },
+            "rgba_color": {
+              "type": "array",
+              "description": "Color as array, [r,g,b,a].",
+              "items": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        "color_selected_correct": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "Was the color selected by the user correct? Null if trial was skipped."
+        },
+        "location_target_dot_index": {
+          "description": "Index (0-based) of presented dot whose location the user was asked to recall. Null if trial was skipped.",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "location_selected": {
+          "description": "Location selected by user. Null if trial was skipped.",
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "x": {
+              "type": "number",
+              "description": "X coordinate of dot."
+            },
+            "y": {
+              "type": "number",
+              "description": "Y coordinate of dot."
+            }
+          }
+        },
+        "location_selected_delta": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Euclidean distance between location target dot and the location selected by user. Null if trial was skipped."
+        },
+        "color_selection_response_time_ms": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Milliseconds from the beginning of color selection task until the user taps the done button. Null if trial was skipped."
+        },
+        "location_selection_response_time_ms": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Milliseconds from the beginning of location selection task until the user taps the done button. Null if trial was skipped."
+        },
+        "quit_button_pressed": {
+          "type": "boolean",
+          "description": "Was the quit button pressed?"
+        },
+        "device_metadata": {
+          "type": "object",
+          "description": "Information about the user's device.",
+          "properties": {
+            "userAgent": {
+              "type": "string",
+              "description": "The user agent string returned by navigator.userAgent."
+            },
+            "devicePixelRatio": {
+              "type": "number",
+              "description": "Ratio of physical pixels to CSS pixels."
+            },
+            "screen": {
+              "type": "object",
+              "description": "Screen information returned by window.screen.",
+              "properties": {
+                "availHeight": {
+                  "type": "number",
+                  "description": "Height of screen, in pixels, excluding UI features."
+                },
+                "availWidth": {
+                  "type": "number",
+                  "description": "Width of screen, in pixels, excluding UI features."
+                },
+                "colorDepth": {
+                  "type": "number",
+                  "description": "Color depth of screen."
+                },
+                "height": {
+                  "type": "number",
+                  "description": "Height of screen, in pixels"
+                },
+                "width": {
+                  "type": "number",
+                  "description": "Width of screen, in pixels."
+                },
+                "orientation": {
+                  "type": "object",
+                  "description": "Information about the device's orientation.",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "The orientation type (ScreenOrientation.type)."
+                    },
+                    "angle": {
+                      "type": "number",
+                      "description": "The orientation angle (ScreenOrientation.angle)."
+                    }
+                  }
+                },
+                "pixelDepth": {
+                  "type": "number",
+                  "description": "Pixel depth of screen."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

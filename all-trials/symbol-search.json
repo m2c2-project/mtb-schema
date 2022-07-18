@@ -1,0 +1,195 @@
+{
+  "description": "All trials and metadata from the assessment Symbol Search.",
+  "$comment": "Activity identifier: symbol-search, version: 0.8.0. JSON Schema generated 2022-07-18T20:26:32.580Z.",
+  "type": "object",
+  "required": [
+    "trials"
+  ],
+  "properties": {
+    "trials": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/trial"
+      },
+      "description": "All trials from the assessment."
+    }
+  },
+  "$defs": {
+    "trial": {
+      "type": "object",
+      "properties": {
+        "activity_uuid": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Unique identifier for all trials in this administration of the activity."
+        },
+        "activity_id": {
+          "type": "string",
+          "description": "Identifier of the activity."
+        },
+        "activity_version": {
+          "type": "string",
+          "description": "Version of the activity."
+        },
+        "activity_begin_iso8601_timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp at the beginning of the game activity."
+        },
+        "trial_begin_iso8601_timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time",
+          "description": "ISO 8601 timestamp at the beginning of the trial. Null if trial was skipped."
+        },
+        "trial_index": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Index of the trial within this assessment, 0-based."
+        },
+        "trial_type": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "normal",
+            "lure",
+            null
+          ],
+          "description": "Indicates if trial was normal or lure. Null if trial was skipped."
+        },
+        "card_configuration": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "Symbols used on cards. Null if trial was skipped.",
+          "properties": {
+            "top_cards_symbols": {
+              "type": "array",
+              "description": "Symbols of the top cards, starting at 0 for leftmost upper card and incrementing by 1 moving right.",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "top": {
+                    "type": "integer",
+                    "description": "Index of the top symbol within the card, 1-based."
+                  },
+                  "bottom": {
+                    "type": "integer",
+                    "description": "Index of the bottom symbol within the card, 1-based."
+                  }
+                }
+              }
+            },
+            "bottom_cards_symbols": {
+              "type": "array",
+              "description": "Symbols of the bottom cards, starting at 0 for leftmost card and incrementing by 1 moving right.",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "top": {
+                    "type": "integer",
+                    "description": "Index of the top symbol within the card, 1-based."
+                  },
+                  "bottom": {
+                    "type": "integer",
+                    "description": "Index of the bottom symbol within the card, 1-based."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "response_time_duration_ms": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Milliseconds from the beginning of the trial until a user taps a response. Null if trial was skipped."
+        },
+        "user_response_index": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Index of user selected response, starting at 0 for leftmost card and incrementing by 1 moving right. Null if trial was skipped."
+        },
+        "correct_response_index": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Index of correct response, starting at 0 for leftmost card and incrementing by 1 moving right. Null if trial was skipped."
+        },
+        "quit_button_pressed": {
+          "type": "boolean",
+          "description": "Was the quit button pressed?"
+        },
+        "device_metadata": {
+          "type": "object",
+          "description": "Information about the user's device.",
+          "properties": {
+            "userAgent": {
+              "type": "string",
+              "description": "The user agent string returned by navigator.userAgent."
+            },
+            "devicePixelRatio": {
+              "type": "number",
+              "description": "Ratio of physical pixels to CSS pixels."
+            },
+            "screen": {
+              "type": "object",
+              "description": "Screen information returned by window.screen.",
+              "properties": {
+                "availHeight": {
+                  "type": "number",
+                  "description": "Height of screen, in pixels, excluding UI features."
+                },
+                "availWidth": {
+                  "type": "number",
+                  "description": "Width of screen, in pixels, excluding UI features."
+                },
+                "colorDepth": {
+                  "type": "number",
+                  "description": "Color depth of screen."
+                },
+                "height": {
+                  "type": "number",
+                  "description": "Height of screen, in pixels"
+                },
+                "width": {
+                  "type": "number",
+                  "description": "Width of screen, in pixels."
+                },
+                "orientation": {
+                  "type": "object",
+                  "description": "Information about the device's orientation.",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "The orientation type (ScreenOrientation.type)."
+                    },
+                    "angle": {
+                      "type": "number",
+                      "description": "The orientation angle (ScreenOrientation.angle)."
+                    }
+                  }
+                },
+                "pixelDepth": {
+                  "type": "number",
+                  "description": "Pixel depth of screen."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
