@@ -1,6 +1,7 @@
 {
   "description": "A single trial and metadata from the assessment Symbol Search.",
-  "$comment": "Activity identifier: symbol-search, version: 0.8.0. JSON Schema generated 2022-07-18T20:26:32.580Z.",
+  "$comment": "Activity identifier: symbol-search, version: 0.8.0. JSON Schema generated 2022-08-19T18:43:23.957Z.",
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
   "type": "object",
   "properties": {
     "activity_uuid": {
