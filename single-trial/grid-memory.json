@@ -1,9 +1,14 @@
 {
   "description": "A single trial and metadata from the assessment Grid Memory.",
-  "$comment": "Activity identifier: grid-memory, version: 0.8.0. JSON Schema generated 2022-08-19T18:43:23.957Z.",
+  "$comment": "Activity identifier: grid-memory, version: 0.8.1. JSON Schema generated 2022-10-03T12:34:50.031Z.",
   "$schema": "https://json-schema.org/draft/2019-09/schema",
   "type": "object",
   "properties": {
+    "session_uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for all activities in this administration of the session."
+    },
     "activity_uuid": {
       "type": "string",
       "format": "uuid",
@@ -239,6 +244,10 @@
               "description": "Pixel depth of screen."
             }
           }
+        },
+        "webGlRenderer": {
+          "type": "string",
+          "description": "WebGL driver vendor and renderer. Taken from WEBGL_debug_renderer_info."
         }
       }
     }
