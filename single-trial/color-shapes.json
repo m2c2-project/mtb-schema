@@ -1,6 +1,6 @@
 {
-  "description": "A single trial and metadata from the assessment Symbol Search.",
-  "$comment": "Activity identifier: symbol-search, version: 0.8.2. JSON Schema generated 2023-01-17T00:01:04.966Z.",
+  "description": "A single trial and metadata from the assessment Color Shapes.",
+  "$comment": "Activity identifier: color-shapes, version: 0.8.2. JSON Schema generated 2023-01-17T00:01:04.966Z.",
   "$schema": "https://json-schema.org/draft/2019-09/schema",
   "type": "object",
   "properties": {
@@ -47,81 +47,119 @@
       ],
       "description": "Index of the trial within this assessment, 0-based."
     },
-    "trial_type": {
+    "present_shapes": {
+      "description": "Configuration of shapes shown to the user in the presentation phase. Null if trial was skipped.",
       "type": [
-        "string",
+        "array",
         "null"
       ],
-      "enum": [
-        "normal",
-        "lure",
-        null
-      ],
-      "description": "Indicates if trial was normal or lure. Null if trial was skipped."
-    },
-    "card_configuration": {
-      "type": [
-        "object",
-        "null"
-      ],
-      "description": "Symbols used on cards. Null if trial was skipped.",
-      "properties": {
-        "top_cards_symbols": {
-          "type": "array",
-          "description": "Symbols of the top cards, starting at 0 for leftmost upper card and incrementing by 1 moving right.",
-          "items": {
-            "type": "object",
-            "properties": {
-              "top": {
-                "type": "integer",
-                "description": "Index of the top symbol within the card, 1-based."
-              },
-              "bottom": {
-                "type": "integer",
-                "description": "Index of the bottom symbol within the card, 1-based."
-              }
+      "items": {
+        "type": "object",
+        "properties": {
+          "shape_index": {
+            "type": "integer",
+            "description": "Index of the shape within the library of shapes, 0-based"
+          },
+          "color_name": {
+            "type": "string",
+            "description": "Human-friendly name of color."
+          },
+          "rgba_color": {
+            "type": "array",
+            "description": "Color as array, [r,g,b,a].",
+            "items": {
+              "type": "number"
             }
-          }
-        },
-        "bottom_cards_symbols": {
-          "type": "array",
-          "description": "Symbols of the bottom cards, starting at 0 for leftmost card and incrementing by 1 moving right.",
-          "items": {
+          },
+          "location": {
             "type": "object",
+            "description": "Location of shape.",
             "properties": {
-              "top": {
-                "type": "integer",
-                "description": "Index of the top symbol within the card, 1-based."
+              "row": {
+                "type": "number",
+                "description": "Row of the shape, 0-based."
               },
-              "bottom": {
-                "type": "integer",
-                "description": "Index of the bottom symbol within the card, 1-based."
+              "column": {
+                "type": "number",
+                "description": "Column of the shape, 0-based."
               }
             }
           }
         }
       }
     },
+    "response_shapes": {
+      "description": "Configuration of shapes shown to the user in the response phase. Null if trial was skipped.",
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "object",
+        "properties": {
+          "shape_index": {
+            "type": "integer",
+            "description": "Index of the shape within the library of shapes, 0-based"
+          },
+          "color_name": {
+            "type": "string",
+            "description": "Human-friendly name of color."
+          },
+          "rgba_color": {
+            "type": "array",
+            "description": "Color as array, [r,g,b,a].",
+            "items": {
+              "type": "number"
+            }
+          },
+          "location": {
+            "type": "object",
+            "description": "Location of shape.",
+            "properties": {
+              "row": {
+                "type": "number",
+                "description": "Row of the shape, 0-based."
+              },
+              "column": {
+                "type": "number",
+                "description": "Column of the shape, 0-based."
+              }
+            }
+          }
+        }
+      }
+    },
+    "number_of_different_shapes": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Number of shapes shown with different colors in the response phase."
+    },
     "response_time_duration_ms": {
       "type": [
         "number",
         "null"
       ],
-      "description": "Milliseconds from the beginning of the trial until a user taps a response. Null if trial was skipped."
+      "description": "Milliseconds from when the response configuration of shapes is shown until the user taps a response. Null if trial was skipped."
     },
-    "user_response_index": {
+    "user_response": {
       "type": [
-        "integer",
+        "string",
         "null"
       ],
-      "description": "Index of user selected response, starting at 0 for leftmost card and incrementing by 1 moving right. Null if trial was skipped."
+      "enum": [
+        "same",
+        "different"
+      ],
+      "description": "User's response to whether the shapes are same colors or different."
     },
-    "correct_response_index": {
+    "user_response_correct": {
       "type": [
-        "integer",
+        "boolean",
         "null"
       ],
-      "description": "Index of correct response, starting at 0 for leftmost card and incrementing by 1 moving right. Null if trial was skipped."
+      "description": "Was the user's response correct?"
     },
     "quit_button_pressed": {
       "type": "boolean",

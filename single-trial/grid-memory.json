@@ -1,9 +1,14 @@
 {
   "description": "A single trial and metadata from the assessment Grid Memory.",
-  "$comment": "Activity identifier: grid-memory, version: 0.8.1. JSON Schema generated 2022-10-03T12:34:50.031Z.",
+  "$comment": "Activity identifier: grid-memory, version: 0.8.2. JSON Schema generated 2023-01-17T00:01:04.966Z.",
   "$schema": "https://json-schema.org/draft/2019-09/schema",
   "type": "object",
   "properties": {
+    "document_uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for this data document."
+    },
     "session_uuid": {
       "type": "string",
       "format": "uuid",
