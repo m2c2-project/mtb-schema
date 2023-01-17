@@ -1,6 +1,6 @@
 {
-  "description": "All trials and metadata from the assessment Color Dots.",
-  "$comment": "Activity identifier: color-dots, version: 0.8.2. JSON Schema generated 2023-01-17T00:01:04.966Z.",
+  "description": "All trials and metadata from the assessment Color Shapes.",
+  "$comment": "Activity identifier: color-shapes, version: 0.8.2. JSON Schema generated 2023-01-17T00:01:04.966Z.",
   "$schema": "https://json-schema.org/draft/2019-09/schema",
   "type": "object",
   "required": [
@@ -62,15 +62,8 @@
           ],
           "description": "Index of the trial within this assessment, 0-based."
         },
-        "square_side_length": {
-          "type": [
-            "number",
-            "null"
-          ],
-          "description": "Length of square side, in pixels. This is the square in which the dots are shown. Null if trial was skipped."
-        },
-        "presented_dots": {
-          "description": "Configuration of dots presented to the user. Null if trial was skipped.",
+        "present_shapes": {
+          "description": "Configuration of shapes shown to the user in the presentation phase. Null if trial was skipped.",
           "type": [
             "array",
             "null"
@@ -78,6 +71,10 @@
           "items": {
             "type": "object",
             "properties": {
+              "shape_index": {
+                "type": "integer",
+                "description": "Index of the shape within the library of shapes, 0-based"
+              },
               "color_name": {
                 "type": "string",
                 "description": "Human-friendly name of color."
@@ -91,99 +88,93 @@
               },
               "location": {
                 "type": "object",
-                "description": "Location of dot.",
+                "description": "Location of shape.",
                 "properties": {
-                  "x": {
+                  "row": {
                     "type": "number",
-                    "description": "X coordinate of dot."
+                    "description": "Row of the shape, 0-based."
                   },
-                  "y": {
+                  "column": {
                     "type": "number",
-                    "description": "Y coordinate of dot."
+                    "description": "Column of the shape, 0-based."
                   }
                 }
               }
             }
           }
         },
-        "color_target_dot_index": {
-          "description": "Index (0-based) of presented dot whose color the user was asked to recall. Null if trial was skipped.",
+        "response_shapes": {
+          "description": "Configuration of shapes shown to the user in the response phase. Null if trial was skipped.",
           "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "color_selected": {
-          "description": "Color selected by user. Null if trial was skipped.",
-          "type": [
-            "object",
+            "array",
             "null"
           ],
-          "properties": {
-            "color_name": {
-              "type": "string",
-              "description": "Human-friendly name of color."
-            },
-            "rgba_color": {
-              "type": "array",
-              "description": "Color as array, [r,g,b,a].",
-              "items": {
-                "type": "number"
+          "items": {
+            "type": "object",
+            "properties": {
+              "shape_index": {
+                "type": "integer",
+                "description": "Index of the shape within the library of shapes, 0-based"
+              },
+              "color_name": {
+                "type": "string",
+                "description": "Human-friendly name of color."
+              },
+              "rgba_color": {
+                "type": "array",
+                "description": "Color as array, [r,g,b,a].",
+                "items": {
+                  "type": "number"
+                }
+              },
+              "location": {
+                "type": "object",
+                "description": "Location of shape.",
+                "properties": {
+                  "row": {
+                    "type": "number",
+                    "description": "Row of the shape, 0-based."
+                  },
+                  "column": {
+                    "type": "number",
+                    "description": "Column of the shape, 0-based."
+                  }
+                }
               }
             }
           }
         },
-        "color_selected_correct": {
+        "number_of_different_shapes": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Number of shapes shown with different colors in the response phase."
+        },
+        "response_time_duration_ms": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Milliseconds from when the response configuration of shapes is shown until the user taps a response. Null if trial was skipped."
+        },
+        "user_response": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "same",
+            "different"
+          ],
+          "description": "User's response to whether the shapes are same colors or different."
+        },
+        "user_response_correct": {
           "type": [
             "boolean",
             "null"
           ],
-          "description": "Was the color selected by the user correct? Null if trial was skipped."
-        },
-        "location_target_dot_index": {
-          "description": "Index (0-based) of presented dot whose location the user was asked to recall. Null if trial was skipped.",
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "location_selected": {
-          "description": "Location selected by user. Null if trial was skipped.",
-          "type": [
-            "object",
-            "null"
-          ],
-          "properties": {
-            "x": {
-              "type": "number",
-              "description": "X coordinate of dot."
-            },
-            "y": {
-              "type": "number",
-              "description": "Y coordinate of dot."
-            }
-          }
-        },
-        "location_selected_delta": {
-          "type": [
-            "number",
-            "null"
-          ],
-          "description": "Euclidean distance between location target dot and the location selected by user. Null if trial was skipped."
-        },
-        "color_selection_response_time_ms": {
-          "type": [
-            "number",
-            "null"
-          ],
-          "description": "Milliseconds from the beginning of color selection task until the user taps the done button. Null if trial was skipped."
-        },
-        "location_selection_response_time_ms": {
-          "type": [
-            "number",
-            "null"
-          ],
-          "description": "Milliseconds from the beginning of location selection task until the user taps the done button. Null if trial was skipped."
+          "description": "Was the user's response correct?"
         },
         "quit_button_pressed": {
           "type": "boolean",
